@@ -1,0 +1,71 @@
+{
+  "id": "lizun.pomodoro",
+  "name": "Pomodoro",
+  "version": "1.0.0",
+  "author": "Lizun",
+  "description": "Focus and break timer with rounds, a chime and today's focus time",
+  "entry": "index.html",
+  "width": 260,
+  "permissions": ["storage", "activity", "media:read", "media:control"],
+  "settings": [
+    { "key": "focusMinutes", "type": "number", "label": "Focus", "unit": "min", "default": 25, "min": 1, "max": 120 },
+    { "key": "shortBreakMinutes", "type": "number", "label": "Short break", "unit": "min", "default": 5, "min": 1, "max": 60 },
+    { "key": "longBreakMinutes", "type": "number", "label": "Long break", "unit": "min", "default": 15, "min": 1, "max": 120 },
+    {
+      "key": "roundsBeforeLongBreak",
+      "type": "number",
+      "label": "Focus rounds before a long break",
+      "default": 4,
+      "min": 2,
+      "max": 10
+    },
+    {
+      "key": "autoStart",
+      "type": "toggle",
+      "label": "Start the next phase by itself",
+      "description": "Otherwise the timer waits for Start after each focus round and break.",
+      "default": false
+    },
+    {
+      "key": "sound",
+      "type": "toggle",
+      "label": "Chime when a phase ends",
+      "default": true
+    },
+    {
+      "key": "pauseMusic",
+      "type": "toggle",
+      "label": "Pause music on breaks",
+      "description": "Pauses what is playing when a break starts and plays it again when focus starts, if the widget paused it.",
+      "default": false
+    },
+    {
+      "key": "showInIsland",
+      "type": "toggle",
+      "label": "Show the timer in the closed island",
+      "default": true
+    }
+  ],
+  "locales": {
+    "ru": {
+      "name": "Помодоро",
+      "description": "Таймер работы и перерывов с раундами, сигналом и временем фокуса за сегодня",
+      "settings": {
+        "focusMinutes": { "label": "Фокус", "unit": "мин" },
+        "shortBreakMinutes": { "label": "Короткий перерыв", "unit": "мин" },
+        "longBreakMinutes": { "label": "Длинный перерыв", "unit": "мин" },
+        "roundsBeforeLongBreak": { "label": "Раундов фокуса до длинного перерыва" },
+        "autoStart": {
+          "label": "Запускать следующий этап автоматически",
+          "description": "Иначе после каждого раунда и перерыва таймер ждёт кнопки «Старт»."
+        },
+        "sound": { "label": "Сигнал в конце этапа" },
+        "pauseMusic": {
+          "label": "Ставить музыку на паузу в перерывах",
+          "description": "Останавливает музыку, когда начинается перерыв, и включает её снова с началом фокуса, если её остановил виджет."
+        },
+        "showInIsland": { "label": "Показывать таймер в закрытом острове" }
+      }
+    }
+  }
+}

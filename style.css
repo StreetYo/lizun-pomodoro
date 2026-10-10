@@ -1,0 +1,250 @@
+.pomodoro {
+  --focus: #ff9f0a;
+  --break: #30d158;
+  --phase: var(--focus);
+  --phase-soft: rgb(255 159 10 / 0.18);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 4px 2px;
+}
+
+.pomodoro[data-phase='short'],
+.pomodoro[data-phase='long'] {
+  --phase: var(--break);
+  --phase-soft: rgb(48 209 88 / 0.18);
+}
+
+.pomodoro[hidden] {
+  display: none;
+}
+
+/* Dial: ring with the countdown inside */
+
+.dial {
+  position: relative;
+  flex: none;
+  width: 120px;
+  height: 120px;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring circle {
+  fill: none;
+  stroke-width: 7;
+}
+
+.track {
+  stroke: var(--lz-card-raised);
+}
+
+.progress {
+  stroke: var(--phase);
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition:
+    stroke-dashoffset 1s linear,
+    stroke 0.3s;
+}
+
+.progress.jump {
+  transition: none;
+}
+
+/* A round cap would show a dot at zero. */
+.progress.empty {
+  opacity: 0;
+}
+
+[data-status='paused'] .progress {
+  opacity: 0.55;
+}
+
+.readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.time {
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+[data-status='paused'] .time {
+  color: var(--lz-text-secondary);
+}
+
+.note {
+  max-width: 96px;
+  overflow: hidden;
+  color: var(--lz-text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Side: phase, rounds, today, controls */
+
+.side {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.phase {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--phase);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  transition: color 0.3s;
+}
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--lz-card-raised);
+}
+
+.dot.done {
+  background: var(--focus);
+}
+
+.dot.current {
+  border: 1.5px solid var(--focus);
+  background: none;
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 14px;
+}
+
+.caption {
+  color: var(--lz-text-tertiary);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.value {
+  overflow: hidden;
+  color: var(--lz-text-secondary);
+  font-size: 12.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.controls button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  font: inherit;
+  transition:
+    filter 0.15s,
+    transform 0.1s,
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.controls button:not(:disabled):hover {
+  filter: brightness(1.25);
+}
+
+.controls button:not(:disabled):active {
+  transform: scale(0.93);
+}
+
+.controls svg {
+  fill: currentColor;
+}
+
+.primary {
+  width: 40px;
+  height: 40px;
+  background: var(--phase-soft);
+  color: var(--phase);
+}
+
+.primary svg {
+  width: 20px;
+  height: 20px;
+}
+
+.primary .pause,
+[data-status='running'] .primary .play {
+  display: none;
+}
+
+[data-status='running'] .primary .pause {
+  display: block;
+}
+
+.secondary {
+  width: 32px;
+  height: 32px;
+  background: var(--lz-card-raised);
+  color: var(--lz-text);
+}
+
+.secondary svg {
+  width: 15px;
+  height: 15px;
+}
+
+#reset svg {
+  fill: none;
+}
+
+.secondary:disabled {
+  color: var(--lz-text-tertiary);
+}
